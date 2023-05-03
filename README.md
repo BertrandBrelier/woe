@@ -6,7 +6,7 @@ woe is a Python library designed to convert categorical and continuous variables
 pip3 install woe-conversion
 ```
 
-## example
+## usage
 ```
 from woe_conversion.woe import *
 
@@ -29,6 +29,29 @@ The transform method is then used to transform the training and test data using 
 
 ## Note on Missing Values
 The weight of evidence is also calculated for missing values. Therefore, missing values should not be imputed before calling the woe model.
+
+## Full working example
+```
+from woe_conversion.woe import *
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+titanic = sns.load_dataset('titanic')
+train, test = train_test_split(titanic, test_size=0.30,random_state=111,stratify=titanic['survived'])
+
+woemodel = WoeConversion(binarytarget='survived', features=['age','sex','class','fare'])
+woemodel.fit(train)
+transformedtrain = woemodel.transform(train)
+transformedtest = woemodel.transform(test)
+
+clf = LogisticRegression()
+clf.fit(transformedtrain[['age','sex','class','fare']], transformedtrain['survived'])
+
+```
+
+
+
 
 ## Author
 woe was created by Bertrand Brelier. If you have any questions or issues, please feel free to contact the author.
