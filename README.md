@@ -1,9 +1,14 @@
 # woe
 woe is a Python library designed to convert categorical and continuous variables into weight of evidence. Weight of evidence is a statistical technique used in information theory to measure the "strength" of a relationship between a binary target variable and a predictor variable. The library can be used for data preprocessing in predictive modeling or machine learning projects.
 
+# installation
+```
+pip3 install woe-conversion
+```
+
 
 ```
-from woe import *
+from woe_conversion.woe import *
 
 # create an instance of the WoeConversion class
 woemodel = WoeConversion(binarytarget='survived', features=['categorical_variable_1','categorical_variable_2','continuous_variable_3'])
