@@ -48,6 +48,11 @@ transformedtest = woemodel.transform(test)
 clf = LogisticRegression()
 clf.fit(transformedtrain[['age','sex','class','fare']], transformedtrain['survived'])
 
+transformedtrain['proba'] = clf.predict_proba(transformedtrain[['age','sex','class','fare']])[:,1]
+train['proba'] = clf.predict_proba(transformedtrain[['age','sex','class','fare']])[:,1]
+transformedtest['proba'] = clf.predict_proba(transformedtest[['age','sex','class','fare']])[:,1]
+test['proba'] = clf.predict_proba(transformedtest[['age','sex','class','fare']])[:,1]
+
 ```
 
 
